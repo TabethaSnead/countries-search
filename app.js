@@ -19,10 +19,15 @@ let continents = [];
 window.addEventListener('load', async () => {
     // call findCountries function with no arguments to fetch all countries (Slice A);
     const allCountriesData = await findCountries();
-    // countries = allCountriesData;
+
     // Slice B: call asynchronous getContinents fetch function and set to response variable
+    const continentResponse = await getContinents();
+    console.log('continents response', continentResponse);
     // Slice B: set the continents state to the response.data
+    continents = continentResponse.data;
+
     // Slice B: call displayContinentOptions function;
+    displayContinentOptions();
 });
 
 async function findCountries(continent) {
@@ -58,5 +63,7 @@ function displayCountries() {
 function displayContinentOptions() {
     for (const continent of continents) {
         // Slice B: Call continent render function and append to continent selector
+        const renderContinent = renderContinentOption(continent);
+        continentSelect.append(renderContinent);
     }
 }
